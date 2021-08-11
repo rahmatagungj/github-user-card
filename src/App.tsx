@@ -1,8 +1,19 @@
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./pages/Home";
+import UserProvider from "./contexts/userContext";
+import UserDetails from "./pages/UserDetails";
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">a</header>
-    </div>
+    <UserProvider>
+      <Router>
+        <Switch>
+          <Route path="/" component={Home} exact />
+          <Route path="/:username" component={UserDetails} />
+        </Switch>
+      </Router>
+    </UserProvider>
   );
 }
 
