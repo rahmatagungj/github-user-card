@@ -41,7 +41,7 @@ const initialContext = {
 
 interface IUserContext {
   userData: IUserData | null;
-  setUserData: React.Dispatch<React.SetStateAction<null>>;
+  setUserData: (userData: null) => void;
 }
 
 export const UserContext = React.createContext<IUserContext>(initialContext);

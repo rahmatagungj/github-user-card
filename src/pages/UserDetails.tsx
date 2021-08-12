@@ -1,5 +1,4 @@
 import React from "react";
-import UserCard from "../components/UserCard";
 import { UserContext } from "../contexts/userContext";
 import { Redirect } from "react-router-dom";
 import {
@@ -13,6 +12,7 @@ const FlexWithIcons: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   return <div className="flex flex-row items-center">{children}</div>;
 };
+
 const UserDetails = () => {
   const { userData } = React.useContext(UserContext);
 
@@ -21,7 +21,7 @@ const UserDetails = () => {
       {!userData && <Redirect to="/" />}
       <div className="max-w-3xl px-4 mx-auto sm:px-6 xl:max-w-5xl xl:px-0 flex flex-col h-screen">
         <div className="m-auto">
-          <UserCard>
+          <div className="flex bg-white rounded-lg shadow-xl p-3 m-auto">
             <div className="flex flex-col md:flex-row">
               <img
                 src={userData?.avatar_url}
@@ -80,7 +80,7 @@ const UserDetails = () => {
                 </div>
               </div>
             </div>
-          </UserCard>
+          </div>
         </div>
       </div>
     </>
