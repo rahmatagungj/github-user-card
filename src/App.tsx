@@ -7,7 +7,7 @@ import UserDetails from "./pages/UserDetails";
 function App() {
   return (
     <UserProvider>
-      <Router>
+      <Router basename="/github-user-card">
         <Switch>
           <Route path="/" component={Home} exact />
           <Route path="/:username" component={UserDetails} />
