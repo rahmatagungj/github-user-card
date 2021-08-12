@@ -4,20 +4,25 @@ import { useHistory } from "react-router-dom";
 
 const Home = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [isError, setIsError] = React.useState<boolean>(false);
   const username = React.useRef<HTMLInputElement | null>(null);
   const { setUserData } = React.useContext(UserContext);
   const history = useHistory();
 
   const handleGetUser = async () => {
     setIsLoading(true);
-    const toBeFind = username.current?.value;
+    const toBeFind = username.current?.value.trim();
     const user = await fetch(`https://api.github.com/users/${toBeFind}`, {
       method: "GET",
     });
     const dataJson = await user.json();
-    setUserData(dataJson);
+    if (dataJson.message !== "Not Found") {
+      setUserData(dataJson);
+      history.push(`/${username.current?.value}`);
+    } else {
+      setIsError(true);
+    }
     setIsLoading(false);
-    history.push(`/${username.current?.value}`);
   };
 
   return (
@@ -27,6 +32,11 @@ const Home = () => {
           <h1 className="text-gray-800 font-bold uppercase mb-2">
             Github User Card
           </h1>
+          {isError && (
+            <h3 className="text-red-800 font-bold uppercase mb-2 text-sm">
+              Profil tidak ditemukan!
+            </h3>
+          )}
           <input
             type="text"
             name="username"

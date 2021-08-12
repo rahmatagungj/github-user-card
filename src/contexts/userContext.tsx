@@ -1,51 +1,47 @@
 import React from "react";
-
-const initialState = {
-  login: "rahmatagungj",
-  id: 30583918,
-  node_id: "MDQ6VXNlcjMwNTgzOTE4",
-  avatar_url: "https://avatars.githubusercontent.com/u/30583918?v=4",
-  gravatar_id: "",
-  url: "https://api.github.com/users/rahmatagungj",
-  html_url: "https://github.com/rahmatagungj",
-  followers_url: "https://api.github.com/users/rahmatagungj/followers",
-  following_url:
-    "https://api.github.com/users/rahmatagungj/following{/other_user}",
-  gists_url: "https://api.github.com/users/rahmatagungj/gists{/gist_id}",
-  starred_url:
-    "https://api.github.com/users/rahmatagungj/starred{/owner}{/repo}",
-  subscriptions_url: "https://api.github.com/users/rahmatagungj/subscriptions",
-  organizations_url: "https://api.github.com/users/rahmatagungj/orgs",
-  repos_url: "https://api.github.com/users/rahmatagungj/repos",
-  events_url: "https://api.github.com/users/rahmatagungj/events{/privacy}",
-  received_events_url:
-    "https://api.github.com/users/rahmatagungj/received_events",
-  type: "User",
-  site_admin: false,
-  name: "Rahmat Agung Julians",
-  company: null,
-  blog: "https://rahmatagungjulians.tech",
-  location: "Indonesia",
-  email: null,
-  hireable: true,
-  bio: "Technology Enthusiast | Philosophy | Logic",
-  twitter_username: "Rahmat_A_J",
-  public_repos: 87,
-  public_gists: 0,
-  followers: 11,
-  following: 1,
-  created_at: "2017-07-31T03:18:02Z",
-  updated_at: "2021-08-11T15:13:40Z",
-};
+interface IUserData {
+  login: string;
+  id: number;
+  node_id: string;
+  avatar_url: string;
+  gravatar_id: string;
+  url: string;
+  html_url: string;
+  followers_url: string;
+  following_url: string;
+  gists_url: string;
+  starred_url: string;
+  subscriptions_url: string;
+  organizations_url: string;
+  repos_url: string;
+  events_url: string;
+  received_events_url: string;
+  type: string;
+  site_admin: boolean;
+  name: string;
+  company?: any;
+  blog: string;
+  location: string;
+  email?: any;
+  hireable: boolean;
+  bio: string;
+  twitter_username: string;
+  public_repos: number;
+  public_gists: number;
+  followers: number;
+  following: number;
+  created_at: string;
+  updated_at: string;
+}
 
 const initialContext = {
-  userData: initialState,
+  userData: null,
   setUserData: () => {},
 };
 
 interface IUserContext {
-  userData: typeof initialState;
-  setUserData: (userData: typeof initialState) => void;
+  userData: IUserData | null;
+  setUserData: React.Dispatch<React.SetStateAction<null>>;
 }
 
 export const UserContext = React.createContext<IUserContext>(initialContext);
@@ -53,7 +49,7 @@ export const UserContext = React.createContext<IUserContext>(initialContext);
 const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [userData, setUserData] = React.useState(initialState);
+  const [userData, setUserData] = React.useState(null);
   return (
     <UserContext.Provider value={{ userData, setUserData }}>
       {children}
