@@ -53,7 +53,7 @@ export const UserContext = React.createContext<IUserContext>(initialContext);
 const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [userData, setUserData] = React.useState(initialContext.userData);
+  const [userData, setUserData] = React.useState(initialState);
   return (
     <UserContext.Provider value={{ userData, setUserData }}>
       {children}
